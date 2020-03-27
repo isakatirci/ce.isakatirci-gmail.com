@@ -19,17 +19,22 @@ import static org.mockserver.model.HttpForward.forward;
 import static org.mockserver.model.HttpRequest.request;
 
 public class MockServerApplication {
-    private static ClientAndServer mockServer = startClientAndServer(9095);
+    private static ClientAndServer mockServer;
 
     public static void main(String[] args) {
 
         System.setProperty("mockserver.forwardHttpProxy",args[0]);
         //System.setProperty("mockserver.forwardHttpsProxy",args[0]);
         System.setProperty("mockserver.forwardProxyAuthenticationUsername",args[1]);
+        System.setProperty("mockserver.proxyAuthenticationUsername",args[1]);
         System.setProperty("mockserver.forwardProxyAuthenticationPassword",args[2]);
+        System.setProperty("mockserver.proxyAuthenticationPassword",args[2]);
+        mockServer = startClientAndServer(9095);
+
 
 
         System.out.println("mockServerClient.isRunning() => " + mockServer.isRunning());
+
 
 /*
         mockServer.when(request())
