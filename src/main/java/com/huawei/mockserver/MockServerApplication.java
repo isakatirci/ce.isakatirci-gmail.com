@@ -19,12 +19,19 @@ import static org.mockserver.model.HttpForward.forward;
 import static org.mockserver.model.HttpRequest.request;
 
 public class MockServerApplication {
-    private static ClientAndServer mockServer = startClientAndServer(1080);
+    private static ClientAndServer mockServer = startClientAndServer(9095);
 
     public static void main(String[] args) {
 
+        System.setProperty("mockserver.forwardHttpProxy",args[0]);
+        //System.setProperty("mockserver.forwardHttpsProxy",args[0]);
+        System.setProperty("mockserver.forwardProxyAuthenticationUsername",args[1]);
+        System.setProperty("mockserver.forwardProxyAuthenticationPassword",args[2]);
+
+
         System.out.println("mockServerClient.isRunning() => " + mockServer.isRunning());
 
+/*
         mockServer.when(request())
                 .forward(
                         forward()
@@ -32,6 +39,7 @@ public class MockServerApplication {
                                 .withPort(8123)
                                 .withScheme(HttpForward.Scheme.HTTP)
                 );
+*/
 
 
         String url = "https://www.haberler.com/";
