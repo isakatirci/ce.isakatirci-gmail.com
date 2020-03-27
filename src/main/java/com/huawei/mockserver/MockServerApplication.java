@@ -23,12 +23,12 @@ public class MockServerApplication {
 
     public static void main(String[] args) {
 
-         System.setProperty("mockserver.forwardHttpProxy",args[0]);
-        System.setProperty("mockserver.forwardHttpsProxy",args[0]);
-        System.setProperty("mockserver.forwardProxyAuthenticationUsername",args[1]);
-        System.setProperty("mockserver.proxyAuthenticationUsername",args[1]);
-        System.setProperty("mockserver.forwardProxyAuthenticationPassword",args[2]);
-        System.setProperty("mockserver.proxyAuthenticationPassword",args[2]);
+       /* System.setProperty("mockserver.forwardHttpProxy",args[0]);
+        System.setProperty("mockserver.forwardHttpsProxy",args[0]);*/
+        System.setProperty("mockserver.forwardProxyAuthenticationUsername",args[0]);
+        System.setProperty("mockserver.proxyAuthenticationUsername",args[0]);
+        System.setProperty("mockserver.forwardProxyAuthenticationPassword",args[1]);
+        System.setProperty("mockserver.proxyAuthenticationPassword",args[1]);
 
 
         mockServer = startClientAndServer(9095);
@@ -38,8 +38,8 @@ public class MockServerApplication {
         mockServer.when(request())
                 .forward(
                         forward()
-                                .withHost(args[3])
-                                .withPort(Integer.parseInt(args[4]))
+                                .withHost(args[2])
+                                .withPort(Integer.parseInt(args[3]))
                                 .withScheme(HttpForward.Scheme.HTTP)
                 );
 
