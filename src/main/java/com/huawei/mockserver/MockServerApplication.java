@@ -23,31 +23,27 @@ public class MockServerApplication {
 
     public static void main(String[] args) {
 
-        System.setProperty("mockserver.forwardHttpProxy",args[0]);
-        //System.setProperty("mockserver.forwardHttpsProxy",args[0]);
+         System.setProperty("mockserver.forwardHttpProxy",args[0]);
+        System.setProperty("mockserver.forwardHttpsProxy",args[0]);
         System.setProperty("mockserver.forwardProxyAuthenticationUsername",args[1]);
         System.setProperty("mockserver.proxyAuthenticationUsername",args[1]);
         System.setProperty("mockserver.forwardProxyAuthenticationPassword",args[2]);
         System.setProperty("mockserver.proxyAuthenticationPassword",args[2]);
+
+
         mockServer = startClientAndServer(9095);
-
-
 
         System.out.println("mockServerClient.isRunning() => " + mockServer.isRunning());
 
-
-/*
         mockServer.when(request())
                 .forward(
                         forward()
-                                .withHost("119.81.189.194")
-                                .withPort(8123)
+                                .withHost(args[3])
+                                .withPort(Integer.parseInt(args[4]))
                                 .withScheme(HttpForward.Scheme.HTTP)
                 );
-*/
 
-
-        String url = "https://www.haberler.com/";
+        String url = "http://127.0.0.1:9095";
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet get = new HttpGet(url);
         //get.setHeader("Content-type", "application/json");
